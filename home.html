@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        html {
+            font-family: Monaco, "Lucida Console", monospace;
+            background-color: darkslategray;
+        }
+        button {
+            font-family: Monaco, "Lucida Console", monospace;
+            background-color: #008871;
+            color: white;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        button:hover, button:active {
+            background-color: #005244;
+        }
+        
+        iframe {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+        h1 {
+            color: white; 
+            text-decoration-line: overline underline; 
+            text-decoration-thickness: 1px;
+            position: fixed;
+            border-radius: 20px;
+            display: block;
+            background-color: #00c9a7;
+            padding: 15px;
+            top: 0px;
+        }
+
+        #time {
+            border-radius: 20px;
+            display: block;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+        #timeEpoch {
+            border-radius: 20px;
+            display: block;
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+        }
+        #Songs {
+            border:1px solid rgb(255, 255, 255);
+            border-radius: 30px;
+            display: block;
+            padding: 10px;
+            width:800px;
+        }
+        input {
+            margin:3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Home</h1>
+    <div style="margin-top: 100px;"></div>
+    <div id="Songs">
+        <button id= "vid1" >HITMAN 2 Soundtrack - Main Menu </a>  
+        <button id= "vid2" >Sarias Song - Legend of Zelda: Ocarina of Time</a>  
+        <button id= "vid3" >Pepsi Man</a>  
+        <button id= "vid4" >Forest Temple - The Legend of Zelda: Ocarina Of Time</a>  
+        <button id= "vid5" >Cuphead OST - Carnival Kerfuffle</a>  
+        <button id= "vid6" >Hyrule Circuit - Mario Kart 8 Deluxe OST </a>  
+        <button id= "vid7" >36 Fit Boss Battle - Ring Fit Adventure </a>  
+        <button id= "vid8" >Solaris Phase 2 - Sonic the Hedgehog</a>  
+        <button id= "vid9" >Lights, Camera, Action! (Studiopolis Zone Act 1) - Sonic Mania</a>  
+        <button id= "vid10" >Hamsterball Music: Expert Race HQ</a>  
+        <button id= "vid11" >Gusty Garden Galaxy - Super Mario Galaxy</a>  
+        <button id= "vid12" >Cloudtop Cruise - Mario Kart 8 Deluxe OST</a>  
+        <button id= "vid13" >Yakuza 0 OST - 28 Interplanetary Spark</a>  
+        <button id= "vid14" >Ducktales Remastered Soundtrack - Moon Theme</a>  
+        <button id= "vid15" >Bully - Soundtrack Final Showdown</a>  
+        <button id= "vid16" >Miitopia OST - Battle (Ultra Demon Lord)</a>  
+        <button id= "vid17" >Windblight Ganon Battle</a>  
+        <button id= "vid18" >Il vento d'orifto</a>  
+        <button id= "vid19" >Hole in One - Rhythm Heaven Fever</button>  
+    </div>
+    <iframe id="youtube" width="1120" height="630" src="https://www.youtube.com/watch?v=IJeFYZNfHpw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    
+
+    <h3 id="timeEpoch">Something isn't working...</h3>
+    <h3 id="time">Something isn't working...</h3>
+
+    <!--
+        Below is code that doesn't currently work, but is currently under development.
+    -->
+
+    <!--
+    <form>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"> <br>
+        <label for="url">Video ID (https://www.youtube.com/watch?v=<strong>dQw4w9WgXcQ</strong>):</label><br>
+        <input type="text" id="url" name="url"><br>
+        <input type="submit">
+    </form>
+    
+    <div id="timer">
+        <form onsubmit="countdown(this)">
+            <label for="workTime">Time for Working (seconds):</label><br>
+            <input type="number" id="workTime" name="workTime"><br>
+            <label for="restTime">Time for Rest/Break (seconds):</label><br>
+            <input type="number" id="restTime" name="restTime"><br>
+            <label for="repeats">Number of repeats:</label><br>
+            <input type="number" id="repeats" name="repeats"><br>
+            <input type="submit">
+        </form>
+        <p id="pomodoroTimer"></p>
+    </div>
+    -->
+    <script>
+        function currentTime() {
+            var x = setInterval(function() {
+                const now = new Date();
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var seconds = now.getSeconds(); 
+                document.getElementById("timeEpoch").innerHTML = now.getTime();
+                document.getElementById("time").innerHTML = hours + ":" + minutes + ":" + seconds;
+            },1000);
+        }
+
+        currentTime();
+
+        function countdown() {
+            var pomodoroOutput = document.getElementById("pomodoroTimer").innerHTML;
+            var initialSecondsForWork = document.getElementById("workTime").value;
+            var initialSecondsForRest = document.getElementById("restTime").value;
+            var repeats = document.getElementById("repeats").value;
+            var remainingSeconds;
+
+            for (let index = 0; index < repeats; index++) {
+                
+                var x = setInterval(function() {
+
+                    if (remainingSeconds == null) {
+                        remainingSeconds = initialSecondsForWork - 1;
+                    } else if (remainingSeconds == 0) {
+                        clearInterval(x);
+                    } else {
+                        remainingSeconds -= 1;
+                        remainingSeconds = null;
+                    }
+
+                    pomodoroOutput = remainingSeconds + "s";
+
+                }, 1000);
+
+                var y = setInterval(function() {
+
+                    if (remainingSeconds == null) {
+                        remainingSeconds = initialSecondsForRest - 1;
+                    } else if (remainingSeconds == 0) {
+                        clearInterval(y);
+                    } else {
+                        remainingSeconds -= 1;
+                        remainingSeconds = null;
+                    }
+
+                    pomodoroOutput = remainingSeconds + "s";
+
+                }, 1000);
+            }
+        };
+        
+        youtube = document.getElementById("youtube");
+
+        var vid1 = "-44gLMIacq4";
+        var vid2 = "eJWupfLLP1Q";
+        var vid3 = "z54MpfR3XE4";
+        var vid4 = "c_G7Haf1aOI";
+        var vid5 = "XORwfYUH23Y";
+        var vid6 = "kM3XBWacZ7U";
+        var vid7 = "sSeFD4nOc98";
+        var vid8 = "qAx3hTZeyBw";
+        var vid9 = "MMwM6hLEyeY";
+        var vid10 ="87XmRW3mTDo";
+        var vid11 ="1bvDHAUv2ak";
+        var vid12 ="t1771Qo2CU8";
+        var vid13 ="MYB-D9qEwzI";
+        var vid14 ="YHEifuLCSIY";
+        var vid15 ="ja49mmsx2xo";
+        var vid16 ="7vRf3WPEoaw";
+        var vid17 ="IJeFYZNfHpw";
+        var vid18 ="Vwo1sTdZi0g";
+        var vid19 ="MF0L5aRUgYw";
+
+        document.getElementById("vid1").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid1;
+            console.log("Pressed button " + "1 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid2").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid2;
+            console.log("Pressed button " + "2 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid3").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid3;
+            console.log("Pressed button " + "3 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid4").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid4;
+            console.log("Pressed button " + "4 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid5").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid5;
+            console.log("Pressed button " + "5 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid6").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid6;
+            console.log("Pressed button " + "6 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid7").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid7;
+            console.log("Pressed button " + "7 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid8").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid8;
+            console.log("Pressed button " + "8 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid9").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid9;
+            console.log("Pressed button " + "9 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid10").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid10;
+            console.log("Pressed button " + "10 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid11").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid11;
+            console.log("Pressed button " + "11 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid12").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid12;
+            console.log("Pressed button " + "12 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid13").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid13;
+            console.log("Pressed button " + "13 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid14").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid14;
+            console.log("Pressed button " + "14 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid15").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid15;
+            console.log("Pressed button " + "15 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid16").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid16;
+            console.log("Pressed button " + "16 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid17").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid17;
+            console.log("Pressed button " + "17 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid18").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid18;
+            console.log("Pressed button " + "18 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+        document.getElementById("vid19").addEventListener("click", function() {
+            var url = "https://www.youtube.com/embed/" + vid19;
+            console.log("Pressed button " + "19 " + "with url " + url);
+            youtube.setAttribute("src", url);
+        });
+    </script>
+</body>
+</html>
